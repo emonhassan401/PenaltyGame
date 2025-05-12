@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crazy Penalty Kicks</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #00aaff;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      margin-top: 30px;
+    }
+    .game {
+      margin-top: 40px;
+      position: relative;
+    }
+    .goal {
+      background: #444;
+      width: 300px;
+      height: 150px;
+      margin: 20px auto;
+      position: relative;
+      border: 5px solid white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .goalie {
+      width: 40px;
+      height: 40px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0;
+      transition: all 0.5s ease;
+    }
+    .ball {
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -40px;
+      left: 140px;
+      opacity: 0;
+      transition: all 0.7s ease;
+    }
+    .player {
+      width: 60px;
+      height: 80px;
+      background: #eee;
+      border-radius: 10px;
+      position: absolute;
+      bottom: -10px;
+      left: 120px;
+    }
+    .buttons {
+      margin-top: 20px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+      background: white;
+      color: #00aaff;
+      border: none;
+      border-radius: 10px;
+    }
+    #result {
+      font-size: 24px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚽ Crazy Penalty Kicks ⚽</h1>
+  <div class="game">
+    <div class="goal">
+      <div class="goalie" id="goalie"></div>
+      <div class="ball" id="ball"></div>
+    </div>
+    <div class="player"></div>
+    <div class="buttons">
+      <button onclick="shoot('left')">Left</button>
+      <button onclick="shoot('center')">Center</button>
+      <button onclick="shoot('right')">Right</button>
+    </div>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    let totalShots = 0;
+    let score = 0;
+
+    function shoot(direction) {
+      if (totalShots >= 5) return;
+
+      const goalie = document.getElementById('goalie');
+      const ball = document.getElementById('ball');
+
+      // Reset ball position
+      ball.style.transition = 'none';
+      ball.style.left = '140px';
+      ball.style.bottom = '-40px';
+      ball.style.opacity = '1';
+      void ball.offsetWidth; // trigger reflow
+
+      // Animate ball
+      ball.style.transition = 'all 0.7s ease';
+      if (direction === 'left') ball.style.left = '20px';
+      else if (direction === 'center') ball.style.left = '140px';
+      else ball.style.left = '260px';
+      ball.style.bottom = '120px';
+
+      // Random goalie move
+      const goalieMove = ['left', 'center', 'right'][Math.floor(Math.random() * 3)];
+      if (goalieMove === 'left') goalie.style.left = '10px';
+      else if (goalieMove === 'center') goalie.style.left = '130px';
+      else goalie.style.left = '250px';
+
+      setTimeout(() => {
+        if (goalieMove === direction) {
+          showResult("❌ Saved by the Goalie!");
+        } else {
+          score++;
+          showResult("✅ Goal!");
+        }
+        totalShots++;
+
+        if (totalShots === 5) {
+          setTimeout(() => {
+            const rating = score >= 4 ? '🐐 GOAT!' : score >= 2 ? '😅 Almost Pro!' : '🤡 Ball Boy!';
+            document.getElementById('result').innerHTML += `<br><strong>Final Score: ${score}/5</strong><br>${rating}<br><button onclick='location.reload()'>Play Again</button>`;
+          }, 500);
+        }
+      }, 800);
+    }
+
+    function showResult(text) {
+      document.getElementById('result').innerHTML = text;
+    }
+  </script>
+</body>
+</html>
