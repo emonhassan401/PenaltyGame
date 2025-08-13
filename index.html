@@ -3,196 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crazy Penalty Kicks</title>
+  <title>Efootball 2025 Awards</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #0099ff, #003366);
-      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
     }
-
-    h1 {
+    header {
       text-align: center;
-      margin: 20px 0;
+      padding: 30px 20px;
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      font-size: 2.5em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 4px #000;
     }
-
-    .game-container {
-      position: relative;
-      max-width: 100%;
-      height: 80vh;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
     }
-
-    .field {
-      position: relative;
-      width: 90vw;
-      height: 70vh;
-      background: #007a33;
-      border: 5px solid white;
+    .player-form {
+      background: rgba(255,255,255,0.05);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #ffeb3b;
+      font-size: 1.1em;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 15px;
       border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .goal-bar {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      height: 80px;
-      background: #e6e6e6;
-      border: 4px solid #fff;
-      border-radius: 10px;
-    }
-
-    .goalie {
-      width: 40px;
-      height: 40px;
-      background: red;
-      border-radius: 50%;
-      position: absolute;
-      top: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      transition: all 0.5s ease;
-      z-index: 10;
-    }
-
-    .shooter {
-      width: 40px;
-      height: 60px;
-      background: #ddd;
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 10px;
-    }
-
-    .ball {
-      width: 20px;
-      height: 20px;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      transition: all 0.5s ease;
-    }
-
-    .controls {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    button {
-      padding: 12px 20px;
-      margin: 10px;
-      font-size: 18px;
       border: none;
-      border-radius: 10px;
-      background: #fff;
-      color: #007a33;
+      font-size: 1em;
+      outline: none;
+      transition: 0.3s;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+    input[type="text"]::placeholder { color: #ddd; }
+    input[type="text"]:focus { background: rgba(255,255,255,0.2); box-shadow: 0 0 10px #ffeb3b; }
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.2em;
+      font-weight: bold;
+      background: linear-gradient(90deg, #00f260, #0575e6);
+      border: none;
+      border-radius: 12px;
       cursor: pointer;
+      transition: 0.4s;
+      color: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
-
-    #result {
+    button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+    .player-section {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 20px;
+      min-height: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .player-section h3 { text-align: center; color: #ffeb3b; margin-bottom: 20px; }
+    .award-card {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 15px;
+      font-weight: bold;
       text-align: center;
-      font-size: 20px;
-      margin-top: 20px;
-      min-height: 60px;
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-
-    @media screen and (max-width: 600px) {
-      .goal-bar {
-        width: 90%;
-        height: 60px;
-      }
-      .goalie {
-        width: 30px;
-        height: 30px;
-      }
-      .shooter {
-        width: 30px;
-        height: 50px;
-      }
-      .ball {
-        width: 16px;
-        height: 16px;
-      }
-    }
+    .award-card:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 25px rgba(0,0,0,0.5); }
   </style>
 </head>
 <body>
-  <h1>⚽ Crazy Penalty Kicks ⚽</h1>
-  <div class="game-container">
-    <div class="field">
-      <div class="goal-bar"></div>
-      <div class="goalie" id="goalie"></div>
-      <div class="ball" id="ball"></div>
-      <div class="shooter"></div>
+
+<header>Efootball 2025 Awards</header>
+
+<div class="container">
+  <!-- Player Form -->
+  <div class="player-form">
+    <h3>Submit Player Data</h3>
+    <div class="form-group">
+      <label for="mainPlayer">Main Player Name</label>
+      <input type="text" id="mainPlayer" placeholder="Enter main player name">
     </div>
+    <div class="form-group"><label for="topScorer">Top Scorer / Golden Boot</label><input type="text" id="topScorer"></div>
+    <div class="form-group"><label for="playmaker">Playmaker Award</label><input type="text" id="playmaker"></div>
+    <div class="form-group"><label for="youngPlayer">Best Young Player</label><input type="text" id="youngPlayer"></div>
+    <div class="form-group"><label for="ballonDor">Ballon d'Or</label><input type="text" id="ballonDor"></div>
+    <div class="form-group"><label for="specialAppearance">Special Appearance</label><input type="text" id="specialAppearance"></div>
+    <div class="form-group"><label for="badTimeHelper">Bad Time Helper</label><input type="text" id="badTimeHelper"></div>
+    <button onclick="submitAwards()">Submit</button>
   </div>
-  <div class="controls" id="controls">
-    <button onclick="shoot('left')">Shoot Left</button>
-    <button onclick="shoot('center')">Shoot Center</button>
-    <button onclick="shoot('right')">Shoot Right</button>
-  </div>
-  <div id="result"></div>
 
-  <script>
-    let totalShots = 0;
-    let score = 0;
+  <!-- Player Sections -->
+  <div class="player-section" id="player1"><h3>Player 1</h3></div>
+  <div class="player-section" id="player2"><h3>Player 2</h3></div>
+  <div class="player-section" id="player3"><h3>Player 3</h3></div>
+  <div class="player-section" id="player4"><h3>Player 4</h3></div>
+</div>
 
-    function shoot(direction) {
-      if (totalShots >= 5) return;
+<script>
+  const MAX_PLAYERS = 4;
+  let playerCount = 0;
 
-      const goalie = document.getElementById("goalie");
-      const ball = document.getElementById("ball");
-      const resultText = document.getElementById("result");
-      const controls = document.getElementById("controls");
-
-      const goalieMove = ["left", "center", "right"][Math.floor(Math.random() * 3)];
-      if (goalieMove === "left") goalie.style.left = "25%";
-      else if (goalieMove === "center") goalie.style.left = "50%";
-      else goalie.style.left = "75%";
-
-      if (direction === "left") ball.style.left = "25%";
-      else if (direction === "center") ball.style.left = "50%";
-      else ball.style.left = "75%";
-      ball.style.bottom = "500px";
-
-      setTimeout(() => {
-        if (direction === goalieMove) {
-          resultText.innerText = `❌ Shot ${totalShots + 1}: Saved by Goalie!`;
-        } else {
-          score++;
-          resultText.innerText = `✅ Shot ${totalShots + 1}: Goal!`;
-        }
-
-        totalShots++;
-
-        setTimeout(() => {
-          ball.style.left = "50%";
-          ball.style.bottom = "80px";
-        }, 500);
-
-        if (totalShots === 5) {
-          setTimeout(() => {
-            const rating = score >= 4 ? '🐐 GOAT!' : score >= 2 ? '😅 Almost Pro!' : '🤡 Ball Boy!';
-            resultText.innerHTML += `<br><strong>Final Score: ${score}/5</strong><br>${rating}<br><br><button onclick='location.reload()'>Play Again</button>`;
-            controls.innerHTML = ''; // Disable buttons
-          }, 800);
-        }
-      }, 600);
+  function submitAwards(){
+    if(playerCount >= MAX_PLAYERS){
+      alert("All 4 players have submitted data!");
+      return;
     }
-  </script>
+
+    const mainPlayer = document.getElementById('mainPlayer').value.trim();
+    if(!mainPlayer){
+      alert("Enter Main Player Name!");
+      return;
+    }
+
+    const awards = {
+      "Top Scorer / Golden Boot": document.getElementById('topScorer').value.trim(),
+      "Playmaker Award": document.getElementById('playmaker').value.trim(),
+      "Best Young Player": document.getElementById('youngPlayer').value.trim(),
+      "Ballon d'Or": document.getElementById('ballonDor').value.trim(),
+      "Special Appearance": document.getElementById('specialAppearance').value.trim(),
+      "Bad Time Helper": document.getElementById('badTimeHelper').value.trim()
+    };
+
+    const sectionId = `player${playerCount+1}`;
+    const sectionDiv = document.getElementById(sectionId);
+    for(let award in awards){
+      if(awards[award]){
+        const card = document.createElement('div');
+        card.className = 'award-card';
+        card.innerHTML = `<strong>${mainPlayer}</strong><br>${award}: ${awards[award]}`;
+        sectionDiv.appendChild(card);
+      }
+    }
+
+    // Clear inputs
+    document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+    playerCount++;
+
+    if(playerCount >= MAX_PLAYERS){
+      document.querySelector('button').disabled = true;
+      alert("All 4 players have submitted! Form disabled.");
+    }
+
+    // Save to localStorage
+    localStorage.setItem('playerData', JSON.stringify(playerCount));
+  }
+
+  // Load from localStorage if available
+  window.onload = function(){
+    const savedCount = localStorage.getItem('playerData');
+    if(savedCount){
+      playerCount = parseInt(savedCount);
+      if(playerCount >= MAX_PLAYERS){
+        document.querySelector('button').disabled = true;
+      }
+    }
+  }
+</script>
+
 </body>
 </html>
